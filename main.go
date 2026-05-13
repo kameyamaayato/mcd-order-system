@@ -9,13 +9,11 @@ import (
 )
 
 func main() {
-	// ログ設定
 	if _, err := os.Stat("logs"); os.IsNotExist(err) {
 		os.Mkdir("logs", 0755)
 	}
 	initDB()
 
-	// ルーティング
 	mux := http.NewServeMux()
 	mux.HandleFunc("/api/orders", corsMiddleware(handleOrders))
 	mux.HandleFunc("/api/orders/", corsMiddleware(handleOrderDetail))
@@ -40,11 +38,11 @@ func corsMiddleware(next http.HandlerFunc) http.HandlerFunc {
 func writeLog(req interface{}, res interface{}) {
 	f, _ := os.OpenFile("logs/order.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	defer f.Close()
-	entry := map[string]interface{}{
-		"time":     "2026-05-13 11:26:43", // 本日の日付
+	
+	logEntry := map[string]interface{}{
 		"request":  req,
 		"response": res,
 	}
-	jsonBytes, _ := json.Marshal(entry)
+	jsonBytes, _ := json.Marshal(logEntry)
 	f.WriteString(string(jsonBytes) + "\n")
 }

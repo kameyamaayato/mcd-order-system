@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
-	"os"
 	"time"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -19,7 +18,6 @@ func initDB() {
 		log.Fatal(err)
 	}
 
-	// テーブル作成
 	query := `
 	CREATE TABLE IF NOT EXISTS order_items (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -39,7 +37,6 @@ func initDB() {
 	}
 }
 
-// 注文番号の生成 (MMDD-NNN)
 func generateOrderNo() (string, error) {
 	today := time.Now().Format("0102")
 	var count int
