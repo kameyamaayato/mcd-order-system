@@ -1,7 +1,6 @@
 package main
 
 import (
-	"database/sql" // これが必要です
 	"encoding/json"
 	"net/http"
 	"strings"
