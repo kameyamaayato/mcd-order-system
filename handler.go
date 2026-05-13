@@ -1,7 +1,7 @@
 package main
 
 import (
-	"database/spl"
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"net/http"
